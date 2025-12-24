@@ -24,8 +24,8 @@ namespace NetMasteryLab.Concepts.CSharpFundamentals.ParseVsTryParse.Examples
 
             try
             {
-                string val = null;
-                int value = int.Parse(val);
+                string? val = null;
+                int value = int.Parse(val!); // Intentionally null for demonstration
             }
             catch (ArgumentNullException)
             {
@@ -92,7 +92,7 @@ namespace NetMasteryLab.Concepts.CSharpFundamentals.ParseVsTryParse.Examples
             Console.WriteLine("   bool ifSuccess = int.TryParse(val, out result);");
             Console.WriteLine("   // ifSuccess = false | result = 0\n");
 
-            string val1 = null;
+            string? val1 = null;
             bool success1 = int.TryParse(val1, out int result1);
             Console.WriteLine($"   ✅ ifSuccess = {success1} | result = {result1}\n");
 
@@ -205,7 +205,7 @@ namespace NetMasteryLab.Concepts.CSharpFundamentals.ParseVsTryParse.Examples
             Console.WriteLine("```\n");
 
             // Simulación
-            string[] testInputs = { "123", "abc", "45.67", null };
+            string?[] testInputs = { "123", "abc", "45.67", null };
             
             foreach (var input in testInputs)
             {
@@ -236,7 +236,7 @@ namespace NetMasteryLab.Concepts.CSharpFundamentals.ParseVsTryParse.Examples
             Console.WriteLine("int number = int.TryParse(userInput, out int result) ? result : 0;");
             Console.WriteLine("```\n");
 
-            string[] testInputs = { "42", "invalid", null };
+            string?[] testInputs = { "42", "invalid", null };
             
             foreach (var input in testInputs)
             {

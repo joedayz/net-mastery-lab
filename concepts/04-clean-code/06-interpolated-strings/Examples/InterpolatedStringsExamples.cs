@@ -217,6 +217,48 @@ namespace NetMasteryLab.Concepts.CleanCode.InterpolatedStrings.Examples
         }
 
         /// <summary>
+        /// Demuestra mejoras de .NET 9 con Enhanced Interpolated Strings
+        /// </summary>
+        public static void DemonstrateNet9Improvements()
+        {
+            Console.WriteLine("═══════════════════════════════════════════════════════════════");
+            Console.WriteLine("  🚀 .NET 9: Enhanced Interpolated Strings");
+            Console.WriteLine("═══════════════════════════════════════════════════════════════\n");
+
+            Console.WriteLine("✨ En .NET 9, las interpolated strings se compilan más eficientemente:");
+            Console.WriteLine("   • Lazy evaluation - Los valores se evalúan solo cuando es necesario");
+            Console.WriteLine("   • Zero memory allocations - En ciertos casos, cero asignaciones");
+            Console.WriteLine("   • Mejor rendimiento - Especialmente en structured logging\n");
+
+            Console.WriteLine("✅ Misma sintaxis, mejor rendimiento:");
+            Console.WriteLine("```csharp");
+            Console.WriteLine("string name = \"Shaheen\";");
+            Console.WriteLine("int age = 30;");
+            Console.WriteLine("string intro = $\"Name: {name}, Age: {age}\";");
+            Console.WriteLine("```\n");
+
+            // Ejemplo práctico
+            string name = "Shaheen";
+            int age = 30;
+            string intro = $"Name: {name}, Age: {age}";
+            Console.WriteLine($"Resultado: {intro}\n");
+
+            Console.WriteLine("💡 Beneficios en .NET 9:");
+            Console.WriteLine("   🚀 Más rápido - Ejecución más rápida sin cambiar código");
+            Console.WriteLine("   💾 Menos memoria - Reducción de asignaciones innecesarias");
+            Console.WriteLine("   📊 Ideal para logging - Mejor rendimiento en structured logging");
+            Console.WriteLine("   ⚡ Optimización automática - El compilador lo maneja\n");
+
+            Console.WriteLine("📝 Ejemplo con Structured Logging:");
+            Console.WriteLine("```csharp");
+            Console.WriteLine("// .NET 9 optimiza esto automáticamente");
+            Console.WriteLine("_logger.LogInformation($\"User {userId} performed action {actionName}\");");
+            Console.WriteLine("// En .NET 8: Siempre asigna memoria");
+            Console.WriteLine("// En .NET 9: Evalúa solo si el nivel de log está habilitado (lazy evaluation)");
+            Console.WriteLine("```\n");
+        }
+
+        /// <summary>
         /// Ejecuta todos los ejemplos
         /// </summary>
         public static void RunAllExamples()
@@ -240,6 +282,8 @@ namespace NetMasteryLab.Concepts.CleanCode.InterpolatedStrings.Examples
             DemonstrateMultiline();
             Console.WriteLine("\n");
             DemonstrateEscaping();
+            Console.WriteLine("\n");
+            DemonstrateNet9Improvements();
 
             Console.WriteLine("═══════════════════════════════════════════════════════════════");
             Console.WriteLine("  RESUMEN");
@@ -249,9 +293,16 @@ namespace NetMasteryLab.Concepts.CleanCode.InterpolatedStrings.Examples
             Console.WriteLine("   ◾ Less Error-Prone - menos propenso a errores");
             Console.WriteLine("   ◾ Dynamic Content - contenido dinámico fácil\n");
             
+            Console.WriteLine("🚀 .NET 9 Mejoras:");
+            Console.WriteLine("   ◾ Enhanced Interpolated Strings - compilación más eficiente");
+            Console.WriteLine("   ◾ Lazy Evaluation - valores evaluados solo cuando necesario");
+            Console.WriteLine("   ◾ Zero Memory Allocations - en ciertos casos");
+            Console.WriteLine("   ◾ Better Performance - especialmente en logging\n");
+            
             Console.WriteLine("💡 Regla General:");
             Console.WriteLine("   • Usa interpolated strings ($\"...\") en lugar de string.Format");
             Console.WriteLine("   • Disponible desde C# 6.0+");
+            Console.WriteLine("   • .NET 9 optimiza automáticamente el rendimiento");
             Console.WriteLine("   • Hace tu código más limpio e intuitivo\n");
         }
 

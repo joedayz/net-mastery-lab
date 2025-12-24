@@ -5,7 +5,9 @@ namespace NetMasteryLab.Concepts.NullArgumentChecks.Examples;
 /// </summary>
 public class NullCheckExamples
 {
+    #pragma warning disable CS0649 // Campo usado para demostración de null checks
     private string? _arg;
+    #pragma warning restore CS0649
 
     /// <summary>
     /// Método tradicional - Forma antigua (menos eficiente)

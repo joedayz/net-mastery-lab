@@ -183,7 +183,7 @@ namespace NetMasteryLab.Concepts.CSharpFundamentals.AttributesReflection.Example
             Console.WriteLine("═══════════════════════════════════════════════════════════════\n");
 
             var typeName = typeof(MyService).FullName;
-            var type = Type.GetType(typeName);
+            var type = Type.GetType(typeName ?? string.Empty);
             
             if (type != null)
             {
@@ -335,7 +335,7 @@ namespace NetMasteryLab.Concepts.CSharpFundamentals.AttributesReflection.Example
     public class AuthorAttribute : Attribute
     {
         public string Name { get; set; }
-        public string Version { get; set; }
+        public string Version { get; set; } = string.Empty;
         
         public AuthorAttribute(string name)
         {

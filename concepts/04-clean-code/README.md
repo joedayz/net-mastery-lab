@@ -36,6 +36,20 @@ Guía completa sobre las convenciones de nomenclatura en C#, incluyendo tabla de
 
 Guía sobre cómo usar interpolated strings en lugar de `string.Format` para código más legible y menos propenso a errores.
 
+### 7. Clear & Descriptive Property Names
+**Ubicación:** `concepts/04-clean-code/07-clear-descriptive-property-names/`
+
+Guía completa sobre cómo elegir nombres claros y descriptivos para propiedades, mejorando legibilidad, mantenibilidad y colaboración.
+
+**Principios Clave:**
+- **Readability**: Nombres que se explican por sí mismos
+- **Maintenance**: Código autoexplicativo para el futuro
+- **Context**: Evitar ambigüedad con nombres específicos
+- **Consistency**: Mantener convenciones consistentes
+- **Simplicity**: Evitar redundancia innecesaria
+- **Domain Terms**: Usar lenguaje del negocio
+- **Balance**: Descriptivo pero no abrumador
+
 ---
 
 ## 🎯 Objetivo

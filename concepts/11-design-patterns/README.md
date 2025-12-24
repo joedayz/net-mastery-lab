@@ -6,10 +6,22 @@ Los Design Patterns (Patrones de Diseño) son soluciones reutilizables a problem
 
 ## 📚 Temas Disponibles
 
-### 1. Unit of Work Pattern
+### 1. Unit of Work & Repository Pattern
 **Ubicación:** `concepts/11-design-patterns/01-unit-of-work/`
 
-Guía completa sobre el patrón Unit of Work en .NET Core. Un patrón poderoso que gestiona transacciones de base de datos y asegura consistencia de datos en aplicaciones .NET.
+Guía completa sobre los patrones Unit of Work y Repository en .NET Core trabajando juntos. Estos patrones proporcionan una abstracción sobre el acceso a datos y gestionan transacciones de manera eficiente.
+
+**Conceptos Clave:**
+- **Repository Pattern**: Actúa como puente entre la base de datos y la lógica de negocio
+- **Unit of Work Pattern**: Asegura que múltiples operaciones se ejecuten como una sola transacción
+- **Arquitectura en Capas**: Web Layer (Controllers), Core Layer (Business Logic & Repositories), Infra Layer (ORM & Database)
+- **Trabajo Conjunto**: Los controladores interactúan con Unit of Work, que delega a repositorios, que usan ORM para acceder a la base de datos
+
+**Beneficios:**
+- ✅ Mejora la organización del código - Separación de responsabilidades
+- ✅ Mejora la testabilidad - Facilita pruebas unitarias
+- ✅ Simplifica interacciones con BD - Reduce código boilerplate
+- ✅ Asegura consistencia de datos - Previene transacciones incompletas
 
 ---
 

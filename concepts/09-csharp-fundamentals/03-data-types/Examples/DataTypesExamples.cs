@@ -16,13 +16,13 @@ namespace NetMasteryLab.Concepts.CSharpFundamentals.DataTypes.Examples
 
             Console.WriteLine("Tipos Numéricos Enteros:");
             byte b = 255;
-            sbyte sb = -128;
-            short s = -32768;
-            ushort us = 65535;
+            _ = (sbyte)(-128); // sb
+            _ = (short)(-32768); // s
+            _ = (ushort)(65535); // us
             int i = -2147483648;
-            uint ui = 4294967295;
+            _ = (uint)(4294967295); // ui
             long l = -9223372036854775808;
-            ulong ul = 18446744073709551615;
+            _ = (ulong)(18446744073709551615); // ul
             
             Console.WriteLine($"  byte: {b}");
             Console.WriteLine($"  int: {i}");

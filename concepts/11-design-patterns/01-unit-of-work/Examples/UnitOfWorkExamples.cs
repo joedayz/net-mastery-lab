@@ -230,7 +230,7 @@ namespace NetMasteryLab.Concepts.DesignPatterns.UnitOfWork.Examples
         public static void RunAllExamples()
         {
             Console.WriteLine("╔═══════════════════════════════════════════════════════════════╗");
-            Console.WriteLine("║          Unit of Work Pattern en .NET Core                    ║");
+            Console.WriteLine("║     Unit of Work & Repository Pattern en .NET Core            ║");
             Console.WriteLine("╚═══════════════════════════════════════════════════════════════╝\n");
 
             DemonstrateBasicStructure();
@@ -250,26 +250,37 @@ namespace NetMasteryLab.Concepts.DesignPatterns.UnitOfWork.Examples
             Console.WriteLine("═══════════════════════════════════════════════════════════════");
             Console.WriteLine("  RESUMEN");
             Console.WriteLine("═══════════════════════════════════════════════════════════════\n");
+            Console.WriteLine("✅ Repository Pattern:");
+            Console.WriteLine("   • Actúa como puente entre BD y lógica de negocio");
+            Console.WriteLine("   • Centraliza acceso a datos");
+            Console.WriteLine("   • Facilita testing y mantenimiento");
+            Console.WriteLine("   • Reduce dependencia en ORM\n");
+            
             Console.WriteLine("✅ Unit of Work Pattern:");
             Console.WriteLine("   • Gestiona transacciones de base de datos");
             Console.WriteLine("   • Coordina múltiples operaciones como una unidad");
-            Console.WriteLine("   • Asegura consistencia de datos\n");
+            Console.WriteLine("   • Asegura consistencia de datos");
+            Console.WriteLine("   • Gestiona múltiples repositorios\n");
+            
+            Console.WriteLine("✅ Arquitectura en Capas:");
+            Console.WriteLine("   • Web Layer: Controllers manejan HTTP");
+            Console.WriteLine("   • Core Layer: Business Logic & Repositories");
+            Console.WriteLine("   • Infra Layer: ORM & Database\n");
+            
+            Console.WriteLine("✅ Trabajo Conjunto:");
+            Console.WriteLine("   • Controller → Unit of Work → Repository → ORM → Database");
+            Console.WriteLine("   • Transacciones atómicas (todo o nada)");
+            Console.WriteLine("   • Mejor organización y testabilidad\n");
             
             Console.WriteLine("✅ Beneficios:");
-            Console.WriteLine("   • Transaction Control: Control de transacciones");
-            Console.WriteLine("   • Code Organization: Organización del código");
-            Console.WriteLine("   • Data Consistency: Consistencia de datos");
-            Console.WriteLine("   • Performance: Mejor rendimiento");
-            Console.WriteLine("   • Maintainability: Mejor mantenibilidad\n");
-            
-            Console.WriteLine("✅ Componentes:");
-            Console.WriteLine("   • IUnitOfWork Interface: Define el contrato");
-            Console.WriteLine("   • Repositories: Operaciones específicas de entidades");
-            Console.WriteLine("   • Database Context: Implementación en EF Core");
-            Console.WriteLine("   • Transaction Scope: Límite de operaciones\n");
+            Console.WriteLine("   • Mejora organización del código");
+            Console.WriteLine("   • Mejora testabilidad");
+            Console.WriteLine("   • Simplifica interacciones con BD");
+            Console.WriteLine("   • Asegura consistencia de datos\n");
             
             Console.WriteLine("💡 Key Takeaway:");
-            Console.WriteLine("   • Usa Unit of Work para operaciones complejas");
+            Console.WriteLine("   • Usa Repository Pattern para abstraer acceso a datos");
+            Console.WriteLine("   • Usa Unit of Work para operaciones transaccionales complejas");
             Console.WriteLine("   • Una sola llamada a CommitAsync() al final");
             Console.WriteLine("   • Siempre usar Dependency Injection");
             Console.WriteLine("   • Implementar IDisposable correctamente\n");

@@ -1,29 +1,31 @@
-# Unit of Work Pattern en .NET Core 🔄
+# Unit of Work & Repository Pattern en .NET Core 🔄
 
 ## Introducción
 
-El patrón **Unit of Work** es un patrón de diseño poderoso que gestiona transacciones de base de datos y asegura consistencia de datos en aplicaciones .NET. Piensa en él como un gestor de transacciones que coordina todas tus operaciones de base de datos.
+Los patrones **Unit of Work** y **Repository** son dos patrones de diseño fundamentales que trabajan juntos para crear una arquitectura limpia, mantenible y escalable en aplicaciones .NET Core. Estos patrones proporcionan una abstracción sobre el acceso a datos y gestionan transacciones de manera eficiente.
 
-## 🎯 ¿Qué es el Unit of Work Pattern?
+## 📌 ¿Qué es el Repository Pattern? 🏗️
 
-El patrón Unit of Work mantiene una lista de objetos afectados por una transacción de negocio y coordina la escritura de cambios y la resolución de problemas de concurrencia. En lugar de hacer múltiples llamadas a `SaveChanges()` en Entity Framework, agrupas todas las operaciones y las ejecutas como una sola unidad transaccional.
+El **Repository Pattern** es un patrón de diseño que actúa como un puente entre la base de datos y la lógica de negocio. En lugar de escribir consultas a lo largo de toda la aplicación, los repositorios proporcionan una forma centralizada de interactuar con la base de datos.
 
-## 🌟 Beneficios Clave
+### ✅ Beneficios del Repository Pattern
 
-### 1. Transaction Control (Control de Transacciones)
-Gestiona múltiples cambios de base de datos como una sola unidad.
+- **Separación de Responsabilidades**: Mantiene la lógica de base de datos separada de la lógica de negocio
+- **Reutilización**: Un solo repositorio puede ser reutilizado en diferentes partes de la aplicación
+- **Mantenibilidad**: Reduce la dependencia en frameworks ORM y permite migración fácil
+- **Testabilidad**: Facilita la creación de mocks y pruebas unitarias
 
-### 2. Code Organization (Organización del Código)
-Centraliza la lógica de gestión de transacciones.
+## 🔄 ¿Qué es el Unit of Work Pattern?
 
-### 3. Data Consistency (Consistencia de Datos)
-Asegura operaciones de todo-o-nada (all-or-nothing).
+El patrón **Unit of Work (UoW)** asegura que múltiples operaciones relacionadas con diferentes entidades se ejecuten como una sola transacción. Esto significa que todas las operaciones tienen éxito o ninguna se confirma en la base de datos.
 
-### 4. Performance (Rendimiento)
-Reduce los viajes de ida y vuelta a la base de datos.
+### ✅ Beneficios del Unit of Work Pattern
 
-### 5. Maintainability (Mantenibilidad)
-Hace el código más limpio y mantenible.
+- **Asegura Consistencia de Datos**: Previene actualizaciones parciales o corrupción de datos
+- **Mejora el Rendimiento**: Reduce llamadas innecesarias a la base de datos agrupando consultas
+- **Gestiona Múltiples Repositorios**: Funciona como un wrapper sobre repositorios para coordinar sus acciones
+- **Control Transaccional**: Gestiona múltiples cambios de base de datos como una sola unidad
+
 
 ## 🛠️ Componentes Principales
 
@@ -281,6 +283,162 @@ public async Task ProcessOrderAsync(int orderId)
     await _unitOfWork.CommitAsync();
 }
 ```
+
+## 🎯 ¿Por Qué Usar Unit of Work & Repository Pattern en .NET Core?
+
+### ✅ Mejora la Organización del Código
+
+Separa responsabilidades, haciendo el código más limpio y mantenible.
+
+```csharp
+// ✅ BIEN: Separación clara de responsabilidades
+public class OrderService
+{
+    private readonly IUnitOfWork _unitOfWork;
+
+    public OrderService(IUnitOfWork unitOfWork)
+    {
+        _unitOfWork = unitOfWork;
+    }
+
+    public async Task ProcessOrderAsync(int orderId)
+    {
+        var order = await _unitOfWork.Orders.GetByIdAsync(orderId);
+        // Lógica de negocio aquí
+        await _unitOfWork.CommitAsync();
+    }
+}
+```
+
+### ✅ Mejora la Testabilidad
+
+Facilita escribir pruebas unitarias para la lógica de negocio.
+
+```csharp
+// ✅ BIEN: Fácil de mockear para pruebas
+[Fact]
+public async Task ProcessOrder_ShouldSucceed()
+{
+    // Arrange
+    var mockUnitOfWork = new Mock<IUnitOfWork>();
+    var mockOrderRepo = new Mock<IOrderRepository>();
+    
+    mockUnitOfWork.Setup(u => u.Orders).Returns(mockOrderRepo.Object);
+    mockOrderRepo.Setup(r => r.GetByIdAsync(1))
+        .ReturnsAsync(new Order { Id = 1 });
+    
+    var service = new OrderService(mockUnitOfWork.Object);
+    
+    // Act
+    await service.ProcessOrderAsync(1);
+    
+    // Assert
+    mockUnitOfWork.Verify(u => u.CommitAsync(), Times.Once);
+}
+```
+
+### ✅ Simplifica las Interacciones con la Base de Datos
+
+Reduce código boilerplate y mejora la mantenibilidad.
+
+```csharp
+// ❌ MAL: Acceso directo a DbContext en múltiples lugares
+public class OrderController : ControllerBase
+{
+    private readonly ApplicationDbContext _context;
+
+    public async Task<IActionResult> CreateOrder([FromBody] Order order)
+    {
+        _context.Orders.Add(order);
+        await _context.SaveChangesAsync(); // Múltiples SaveChanges
+        return Ok(order);
+    }
+}
+
+// ✅ BIEN: Usar Unit of Work & Repository
+public class OrderController : ControllerBase
+{
+    private readonly IUnitOfWork _unitOfWork;
+
+    public async Task<IActionResult> CreateOrder([FromBody] Order order)
+    {
+        _unitOfWork.Orders.Add(order);
+        await _unitOfWork.CommitAsync(); // Una sola transacción
+        return Ok(order);
+    }
+}
+```
+
+### ✅ Asegura Consistencia de Datos
+
+Previene transacciones incompletas o datos corruptos.
+
+```csharp
+// ✅ BIEN: Transacción atómica con Unit of Work
+public async Task TransferFundsAsync(int fromAccountId, int toAccountId, decimal amount)
+{
+    var fromAccount = await _unitOfWork.Accounts.GetByIdAsync(fromAccountId);
+    var toAccount = await _unitOfWork.Accounts.GetByIdAsync(toAccountId);
+
+    fromAccount.Balance -= amount;
+    toAccount.Balance += amount;
+
+    _unitOfWork.Accounts.Update(fromAccount);
+    _unitOfWork.Accounts.Update(toAccount);
+
+    // Todo o nada - si falla, nada se guarda
+    await _unitOfWork.CommitAsync();
+}
+```
+
+## 💡 Comparación de Patrones
+
+### 1️⃣ Acceso Directo a ORM
+
+```
+Controller → ORM → Database
+```
+
+**Ventajas:**
+- Simple y directo
+- Menos abstracción
+
+**Desventajas:**
+- Lógica de base de datos dispersa
+- Difícil de testear
+- Múltiples llamadas SaveChanges()
+
+### 2️⃣ Repository Pattern
+
+```
+Controller → Repository → ORM → Database
+```
+
+**Ventajas:**
+- Abstracción sobre acceso a datos
+- Más fácil de testear
+- Centraliza lógica de base de datos
+
+**Desventajas:**
+- Múltiples SaveChanges() si hay varios repositorios
+- No garantiza transacciones atómicas entre repositorios
+
+### 3️⃣ Repository + Unit of Work Pattern ⭐
+
+```
+Controller → Unit of Work → Repository → ORM → Database
+```
+
+**Ventajas:**
+- Abstracción completa
+- Transacciones atómicas
+- Fácil de testear
+- Mejor rendimiento (una sola transacción)
+- Consistencia de datos garantizada
+
+**Desventajas:**
+- Más complejidad inicial
+- Más código para mantener
 
 ## 💡 Mejores Prácticas
 

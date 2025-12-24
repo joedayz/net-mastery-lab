@@ -168,7 +168,46 @@ Las interpolated strings están disponibles desde:
 
 ### 2. Performance
 
-Las interpolated strings se compilan a llamadas a `string.Format` internamente, por lo que el rendimiento es similar.
+#### Antes de .NET 9
+Las interpolated strings se compilaban a llamadas a `string.Format` o concatenación simple, lo que causaba asignaciones de memoria innecesarias, especialmente en aplicaciones con mucho logging o alto rendimiento.
+
+```csharp
+// .NET 8 y anteriores: Se compila a string.Format
+string name = "Shaheen";
+int age = 30;
+string intro = $"Name: {name}, Age: {age}";
+// Internamente: string.Format("Name: {0}, Age: {1}", name, age)
+```
+
+#### .NET 9: Enhanced Interpolated Strings 🚀
+
+En **.NET 9**, las interpolated strings se compilan de manera más eficiente usando **Interpolated String Handlers**. Esto significa:
+
+- ✅ **Lazy evaluation**: Los valores se evalúan solo cuando es necesario
+- ✅ **Zero memory allocations**: En ciertos casos, cero asignaciones de memoria
+- ✅ **Mejor rendimiento**: Especialmente en escenarios condicionales (como structured logging)
+
+```csharp
+// .NET 9: Compilación optimizada con Interpolated String Handlers
+string name = "Shaheen";
+int age = 30;
+string intro = $"Name: {name}, Age: {age}";
+// El compilador optimiza esto automáticamente
+```
+
+**Beneficios en .NET 9:**
+- 🚀 **Más rápido**: Ejecución más rápida sin cambiar tu código
+- 💾 **Menos memoria**: Reducción de asignaciones de memoria innecesarias
+- 📊 **Ideal para logging**: Mejor rendimiento en aplicaciones con mucho logging
+- ⚡ **Sin cambios de código**: La misma sintaxis, mejor rendimiento
+
+**Ejemplo con Structured Logging:**
+```csharp
+// .NET 9 optimiza esto automáticamente
+_logger.LogInformation($"User {userId} performed action {actionName} at {DateTime.UtcNow}");
+// En .NET 8: Siempre asigna memoria
+// En .NET 9: Evalúa solo si el nivel de log está habilitado (lazy evaluation)
+```
 
 ### 3. Escapado de Llaves
 

@@ -57,8 +57,8 @@ public class MinByMaxByExamples
         var priciest = cars.OrderByDescending(c => c.Price).First();
         stopwatch.Stop();
 
-        Console.WriteLine($"Carro más barato: {cheapest.Brand} {cheapest.Model} - ${cheapest.Price:N0}");
-        Console.WriteLine($"Carro más caro: {priciest.Brand} {priciest.Model} - ${priciest.Price:N0}");
+        Console.WriteLine($"Carro más barato: {cheapest?.Brand} {cheapest?.Model} - ${cheapest?.Price:N0}");
+        Console.WriteLine($"Carro más caro: {priciest?.Brand} {priciest?.Model} - ${priciest?.Price:N0}");
         Console.WriteLine($"Tiempo de ejecución: {stopwatch.ElapsedTicks} ticks\n");
     }
 
@@ -89,8 +89,8 @@ public class MinByMaxByExamples
         var priciest = cars.MaxBy(c => c.Price);
         stopwatch.Stop();
 
-        Console.WriteLine($"Carro más barato: {cheapest.Brand} {cheapest.Model} - ${cheapest.Price:N0}");
-        Console.WriteLine($"Carro más caro: {priciest.Brand} {priciest.Model} - ${priciest.Price:N0}");
+        Console.WriteLine($"Carro más barato: {cheapest?.Brand} {cheapest?.Model} - ${cheapest?.Price:N0}");
+        Console.WriteLine($"Carro más caro: {priciest?.Brand} {priciest?.Model} - ${priciest?.Price:N0}");
         Console.WriteLine($"Tiempo de ejecución: {stopwatch.ElapsedTicks} ticks\n");
     }
 
@@ -153,12 +153,12 @@ public class MinByMaxByExamples
         Console.WriteLine("```\n");
 
         var bestStudent = students.MaxBy(s => s.Grade);
-        Console.WriteLine($"Mejor estudiante: {bestStudent.Name} - Calificación: {bestStudent.Grade}\n");
+        Console.WriteLine($"Mejor estudiante: {bestStudent?.Name} - Calificación: {bestStudent?.Grade}\n");
 
         var cars = GetCars();
         Console.WriteLine("Encontrar el carro más barato:");
         var cheapestCar = cars.MinBy(c => c.Price);
-        Console.WriteLine($"Carro más barato: {cheapestCar.Brand} {cheapestCar.Model} - ${cheapestCar.Price:N0}\n");
+        Console.WriteLine($"Carro más barato: {cheapestCar?.Brand} {cheapestCar?.Model} - ${cheapestCar?.Price:N0}\n");
     }
 
     /// <summary>
@@ -183,7 +183,7 @@ public class MinByMaxByExamples
             .Where(c => c.Price > 20000)
             .MinBy(c => c.Price);
 
-        Console.WriteLine($"Carro más barato (precio > $20,000): {cheapestActiveCar.Brand} - ${cheapestActiveCar.Price:N0}\n");
+        Console.WriteLine($"Carro más barato (precio > $20,000): {cheapestActiveCar?.Brand} - ${cheapestActiveCar?.Price:N0}\n");
     }
 
     /// <summary>

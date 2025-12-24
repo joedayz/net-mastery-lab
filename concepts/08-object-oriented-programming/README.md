@@ -31,6 +31,39 @@ Guía sobre el concepto de polimorfismo: "One Interface, Many Implementations". 
 
 Guía sobre los conceptos clave de clases en OOP: instancias, referencias y variables (instance variables y static variables).
 
+### 6. Abstract Class vs Interface
+**Ubicación:** `concepts/08-object-oriented-programming/06-abstract-class-vs-interface/`
+
+Guía completa sobre las diferencias entre Abstract Class e Interface, cuándo usar cada uno y cómo combinarlos estratégicamente.
+
+**Diferencias Clave:**
+- **Implementation**: Abstract Class tiene métodos abstractos y concretos, Interface principalmente declaraciones
+- **Inheritance**: Abstract Class = herencia simple, Interface = herencia múltiple
+- **Access Modifiers**: Abstract Class = todos los modificadores, Interface = principalmente public
+- **Purpose**: Abstract Class = comportamiento común, Interface = contrato
+
+**Cuándo Usar:**
+- **Abstract Class**: Relación "is-a", código común, campos, constructores
+- **Interface**: Contrato, herencia múltiple, relación "can-do"
+
+### 7. Types of Inheritance in .NET Core
+**Ubicación:** `concepts/08-object-oriented-programming/07-types-of-inheritance/`
+
+Guía completa sobre los diferentes tipos de herencia en .NET Core: Single, Multiple (via Interfaces), Multilevel, Hierarchical y Hybrid Inheritance.
+
+**Tipos de Herencia:**
+- **Single Inheritance**: Una clase hereda de una clase base única
+- **Multiple Inheritance**: Una clase implementa múltiples interfaces
+- **Multilevel Inheritance**: Cadena de herencia (A → B → C)
+- **Hierarchical Inheritance**: Múltiples clases de una base común
+- **Hybrid Inheritance**: Combinación de clase base + interfaces
+
+**Beneficios:**
+- ✅ **Code Reusability**: Reutilización de código sin duplicación
+- ✅ **Maintainability**: Cambios centralizados se propagan automáticamente
+- ✅ **Scalability**: Fácil agregar nuevas funcionalidades
+- ✅ **Polymorphism**: Tratamiento uniforme de objetos diferentes
+
 ---
 
 ## 🎯 Objetivo

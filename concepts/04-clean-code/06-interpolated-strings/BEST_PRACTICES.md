@@ -176,9 +176,35 @@ for (int i = 0; i < 1000; i++)
 var result = sb.ToString();
 ```
 
+## 🚀 Mejoras en .NET 9
+
+### Enhanced Interpolated Strings
+
+**.NET 9** introduce mejoras significativas en el rendimiento de interpolated strings:
+
+- ✅ **Interpolated String Handlers**: Compilación más eficiente
+- ✅ **Lazy Evaluation**: Los valores se evalúan solo cuando es necesario
+- ✅ **Zero Memory Allocations**: En ciertos casos, cero asignaciones de memoria
+- ✅ **Mejor Rendimiento**: Especialmente en structured logging
+
+**Ejemplo:**
+```csharp
+// Misma sintaxis, mejor rendimiento en .NET 9
+string name = "Shaheen";
+int age = 30;
+string intro = $"Name: {name}, Age: {age}";
+```
+
+**Beneficios:**
+- 🚀 Más rápido sin cambiar código
+- 💾 Menos memoria
+- 📊 Ideal para logging intensivo
+- ⚡ Optimización automática del compilador
+
 ## 📚 Recursos Adicionales
 
 - [Microsoft Docs - String Interpolation](https://docs.microsoft.com/dotnet/csharp/language-reference/tokens/interpolated)
 - [Microsoft Docs - Composite Formatting](https://docs.microsoft.com/dotnet/standard/base-types/composite-formatting)
+- [.NET 9 Performance Improvements](https://devblogs.microsoft.com/dotnet/performance-improvements-in-net-9/)
 - [C# String Interpolation Best Practices](https://docs.microsoft.com/dotnet/csharp/programming-guide/strings/)
 

@@ -6,9 +6,11 @@ namespace NetMasteryLab.Concepts.CleanCode.NamingConventions.Examples
     public class NamingConventionsExamples
     {
         // ✅ BIEN: Campo privado con prefijo _
+        #pragma warning disable CS0169 // Campo usado para demostrar convenciones de nomenclatura
         private int _userId;
-        private string _userName;
-        private List<ExampleOrder> _orders;
+        private string? _userName;
+        private List<ExampleOrder>? _orders;
+        #pragma warning restore CS0169
 
         // ✅ BIEN: Constante en PascalCase
         public const int MaxRetries = 3;
@@ -268,8 +270,10 @@ namespace MyCompany.MyProject.Services
 
     public class UserService : IUserService
     {
+        #pragma warning disable CS0169 // Campo usado para demostrar convenciones de nomenclatura
         private int _userId;
-        private List<ExampleOrder> _orders;
+        private List<ExampleOrder>? _orders;
+        #pragma warning restore CS0169
 
         public const int MaxRetries = 3;
 

@@ -2,6 +2,15 @@
 
 Repositorio de aprendizaje para dominar conceptos avanzados de C# y .NET y alcanzar un nivel senior.
 
+## 🎯 ¿Por Dónde Empezar?
+
+**👉 Lee primero:** [`GUIA_APRENDIZAJE.md`](GUIA_APRENDIZAJE.md) - Guía paso a paso completa con ruta de aprendizaje recomendada.
+
+**🚀 Inicio rápido:**
+```bash
+dotnet run  # Ejecuta el menú interactivo para explorar todos los conceptos
+```
+
 ## 📚 Conceptos Disponibles
 
 ### 1. IEnumerable vs IQueryable
